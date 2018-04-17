@@ -16,7 +16,6 @@ class MethodGet:
 
     def transfer(self):
         response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
-        print(response)
         response = json.loads(response.content.decode("utf-8"))
         return response
 
@@ -84,7 +83,6 @@ def message_handler(message):
             }
             a.param(**add_user)
             result = a.transfer()
-            print(result)
             bot.send_message(message.from_user.id, result)
 
 
