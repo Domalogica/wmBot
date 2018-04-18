@@ -45,7 +45,7 @@ def handle_start(message):
             add_message_db(message.chat.id, message.message_id)
         else:
             try:
-                print(message_id)
+                print(message.chat.id)
                 del_msgmenu(message_id, message.chat.id)
             except Exception as e:
                 pass
