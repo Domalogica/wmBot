@@ -26,6 +26,7 @@ class MethodGet:
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
+    message_id = get_message_db(message.chat.id)
     del_msgmenu(message_id, message.chat.id)
     del_message_db(message.chat.id)
     menu_list = get_branch_db(message.from_user.id)
