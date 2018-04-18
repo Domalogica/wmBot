@@ -127,7 +127,11 @@ def distributor():
 
 def upt_msgmenu(text, menu_list, message_id, chat_id):
     send = bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=generator_menu(menu_list))
-    del_msgmenu(message_id, chat_id):
+    # add_message_db(chat_id, send.message_id)
+
+
+def del_msgmenu(message_id, chat_id):
+    bot.delete_message(message_id=message_id, chat_id=chat_id)
 
 
 
