@@ -39,7 +39,6 @@ def handle_start(message):
         add_message_db(message.chat.id, send.message_id)
     else:
         message_id = get_message_db(message.chat.id)
-        print(type(message_id))
         if not message_id:
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
