@@ -44,10 +44,7 @@ def handle_start(message):
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
             add_message_db(message.chat.id, message.message_id)
         else:
-            try:
-                del_msgmenu(message_id, message.chat.id)
-            except Exception as e:
-                pass
+            del_msgmenu(message_id, message.chat.id)
             del_message_db(message.chat.id)
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
@@ -130,11 +127,7 @@ def distributor():
 
 def upt_msgmenu(text, menu_list, message_id, chat_id):
     send = bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=generator_menu(menu_list))
-    # add_message_db(chat_id, send.message_id)
-
-
-def del_msgmenu(message_id, chat_id):
-    bot.delete_message(message_id=message_id, chat_id=chat_id)
+    del_msgmenu(message_id, chat_id):
 
 
 
