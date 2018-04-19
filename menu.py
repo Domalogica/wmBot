@@ -35,6 +35,7 @@ menu = {
     ID14: False
 }
 
+
 def generator_menu(menu_list):
     print(menu_list)
     if menu_list:
@@ -54,3 +55,9 @@ def generator_menu(menu_list):
         return user_markup
 
 
+
+def generator_stop():
+    item = telebot.types.InlineKeyboardButton(text='Остановить', callback_data='Остановить')
+    user_markup.add(item)
+    return user_markup
+    

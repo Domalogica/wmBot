@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import telebot
-from menu import menu, generator_menu
+from menu import menu, generator_menu, generator_stop
 from db import connect_mysql
 import requests, json
 
@@ -100,7 +100,7 @@ def message_handler(message):
                 pass
             del_message_db(message.chat.id)
             menu_list = get_branch_db(message.from_user.id)
-            send = bot.send_message(message.from_user.id, "Введите ID водомата", reply_markup=generator_menu("Остановить"))
+            send = bot.send_message(message.from_user.id, "Введите ID водомата", reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
             # bot.send_message(message.from_user.id, result)
 
