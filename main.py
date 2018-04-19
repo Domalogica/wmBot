@@ -67,7 +67,7 @@ def message_handler(message):
         transition(message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(message.data, message.message.chat.id)
-    else message.data:
+    elif message.data:
         transition(message.data, message.message.chat.id)
 
 
