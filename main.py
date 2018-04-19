@@ -65,8 +65,10 @@ def handle_start(message):
 def message_handler(message):
     if message.data == "Подключиться к водомату":
         transition(message.data, message.message.chat.id)
-    # elif True:
-    #     pass
+    elif message.data == "Назад":
+        go_back(message.data, message.message.chat.id)
+    else message.data:
+        transition(message.data, message.message.chat.id)
 
 
 @bot.message_handler(content_types=['text'])
