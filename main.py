@@ -83,6 +83,7 @@ def message_handler(message):
             result = a.transfer()
             print(result)
             try:
+                message_id = get_message_db(message.chat.id)
                 del_msgmenu(message_id, message.chat.id)
             except Exception as e:
                 pass
