@@ -16,7 +16,11 @@ class MethodGet:
 
     def transfer(self):
         response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
-        response = json.loads(response.content.decode("utf-8"))
+        print(response)
+        try:
+            response = json.loads(response.content.decode("utf-8"))
+        except Exception as e:
+            pass
         return response
 
     def param(self, **kwargs):
