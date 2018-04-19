@@ -44,7 +44,10 @@ def handle_start(message):
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
             add_message_db(message.chat.id, send.message_id)
         else:
-            bot.delete_message(chat_id=message.chat.id, message_id=message_id)
+            try:
+                del_msgmenu(message_id, message.chat.id)
+            except Exception as e:
+                pass
             del_message_db(message.chat.id)
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
