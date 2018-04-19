@@ -76,6 +76,14 @@ def message_handler(message):
         transition(message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(message.data, message.message.chat.id)
+    elif message.data  == "Остановить":
+        a = MethodGet("disconnect/wm")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
     elif message.data:
         transition(message.data, message.message.chat.id)
 
@@ -114,24 +122,23 @@ def message_handler(message):
 #     send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
 #     add_message_db(message.chat.id, send.message_id)
 
-@bot.callback_query_handler(func=lambda message: True)
-def determinant(message):
-    if message.data == "Назад":
-        go_back(message.data, message.message.chat.id)
-    elif message.data  == "Остановить":
-        a = MethodGet("disconnect/wm")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
-        print(result)
-        transition(message.data, message.message.chat.id)
-    elif message.data:
-        transition(message.data, message.message.chat.id)
-    else:
-        if message.data == "Подключиться к водомату":
-            pass
+# @bot.callback_query_handler(func=lambda message: True)
+# def determinant(message):
+#     if message.data == "Назад":
+#         go_back(message.data, message.message.chat.id)
+#     elif message.data  == "Остановить":
+#         a = MethodGet("disconnect/wm")
+#         add_user = {
+#             "telegram": message.from_user.id
+#         }
+#         a.param(**add_user)
+#         result = a.transfer()
+#         print(result)
+#     elif message.data:
+#         transition(message.data, message.message.chat.id)
+#     else:
+#         if message.data == "Подключиться к водомату":
+#             pass
 
 
 
