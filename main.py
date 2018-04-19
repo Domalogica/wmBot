@@ -61,17 +61,8 @@ def handle_start(message):
 def message_handler(message):
     if message.data == "Подключиться к водомату":
         transition(message.data, message.message.chat.id)
-    # elif isdigit(message.data):
-    #     menu_list = get_branch_db(message.from_user.id)
-    #     if menu_list[-1] == == "Подключиться к водомату":
-    #         a = MethodGet("connect/wm")
-    #         add_user = {
-    #             "telegram": message.from_user.id,
-    #             "first_name": message.chat.first_name
-    #         }
-    #         a.param(**add_user)
-    #         result = a.transfer()
-    #     else:
+    # elif True:
+    #     pass
 
 
 @bot.message_handler(content_types=['text'])
