@@ -61,6 +61,15 @@ def handle_start(message):
 # URL:8485/app/connect/wm methods=['GET']) args (user:id, wm:id)
 
 
+# URL:8485/app/add_user  methods=['GET'] args (user:id)
+
+# URL:8485/app/disconnect/wm methods=['GET'] args (user:id)
+
+# URL:8485/app/connect/wm methods=['GET']) args (user:id, wm:id)
+
+
+
+
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
@@ -109,6 +118,15 @@ def message_handler(message):
 def determinant(message):
     if message.data == "Назад":
         go_back(message.data, message.message.chat.id)
+    elif message.data  == "Остановить"::
+        a = MethodGet("disconnect/wm")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
+        transition(message.data, message.message.chat.id)
     elif message.data:
         transition(message.data, message.message.chat.id)
     else:
