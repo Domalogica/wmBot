@@ -77,7 +77,8 @@ def message_handler(message):
             }
             a.param(**add_user)
             result = a.transfer()
-            bot.send_message(message.from_user.id, result)
+            print(result)
+            # bot.send_message(message.from_user.id, result)
 
 
 
