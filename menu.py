@@ -57,7 +57,17 @@ def generator_menu(menu_list):
 
 
 def generator_stop():
+    user_markup = telebot.types.InlineKeyboardMarkup()
     item = telebot.types.InlineKeyboardButton(text='Остановить', callback_data='Остановить')
     user_markup.add(item)
     return user_markup
+
+
+
+
+
+
+
+
+    
     
