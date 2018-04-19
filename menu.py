@@ -19,7 +19,7 @@ ID14 = ("Остановить")
 menu = {
     "MAIN": [ID1, ID2, ID3],
     ID0: False,
-    ID1: [ID0],
+    ID1: [ID14],
     ID2: [ID4, ID5, ID6, ID0],
     ID3: [ID7, ID8, ID0],
     ID4: False,
