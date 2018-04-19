@@ -83,7 +83,8 @@ def message_handler(message):
         }
         a.param(**add_user)
         result = a.transfer()
-        print(result)
+        if result['return'] == "SUCCESSFUL":
+            go_back(message.data, message.message.chat.id)
     elif message.data:
         transition(message.data, message.message.chat.id)
 
