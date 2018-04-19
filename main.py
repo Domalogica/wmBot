@@ -51,7 +51,7 @@ def handle_start(message):
             del_message_db(message.chat.id)
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
-            add_message_db(message.chat.id, message.message_id)
+            add_message_db(message.chat.id, send.message_id)
 
 
 # URL:8485/app/connect/wm methods=['GET']) args (user:id, wm:id)
