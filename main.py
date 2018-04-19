@@ -118,7 +118,7 @@ def message_handler(message):
 def determinant(message):
     if message.data == "Назад":
         go_back(message.data, message.message.chat.id)
-    elif message.data  == "Остановить"::
+    elif message.data  == "Остановить":
         a = MethodGet("disconnect/wm")
         add_user = {
             "telegram": message.from_user.id
