@@ -14,7 +14,7 @@ class MysqlPython(object):
     __session    = None
     __connection = None
 
-    def __init__(self, host='localhost', user='root', password='', database='', charset='utf8'):
+    def __init__(self, host='194.67.217.180', user='root', password='', database='', charset='utf8'):
         self.__host     = host
         self.__user     = user
         self.__password = password
@@ -148,7 +148,7 @@ class MysqlPython(object):
         return result
 
 
-connect_mysql = MysqlPython('127.0.0.1', 'root', '7087', 'wm_bot')
+connect_mysql = MysqlPython('194.67.217.180', 'root', '7087', 'wm_bot')
 
 
 #select
