@@ -63,9 +63,9 @@ def handle_start(message):
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        transition(text_get, message.message.chat.id)
+        transition(message.data, message.message.chat.id)
     elif message.data == "Назад":
-        go_back(text_get, message.message.chat.id)
+        go_back(message.data, message.message.chat.id)
     elif message.data  == "Остановить":
         a = MethodGet("disconnect/wm")
         add_user = {
@@ -75,9 +75,9 @@ def message_handler(message):
         result = a.transfer()
         print(result)
         if result['return'] == "SUCCESSFUL":
-            go_back(text_get, message.message.chat.id)
+            go_back(message.data, message.message.chat.id)
     elif message.data:
-        transition(text_get, message.message.chat.id)
+        transition(message.data, message.message.chat.id)
 
 
 @bot.message_handler(content_types=['text'])
