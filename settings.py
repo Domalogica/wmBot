@@ -15,11 +15,11 @@ methods = [
 ]
 
 param = {
-    "telegram" message.from_user.id,
-    "username" message.chat.first_name,
-    "review" message.text,
-    "wm" message.text,
-    "X" message.location.latitude,
+    "telegram": message.from_user.id,
+    "username": message.chat.first_name,
+    "review": message.text,
+    "wm": message.text,
+    "X": message.location.latitude,
     "Y": message.location.longitude
 }
 
