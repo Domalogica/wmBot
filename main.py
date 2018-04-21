@@ -3,6 +3,7 @@ import telebot
 from menu import menu, generator_menu, generator_stop
 from db import connect_mysql
 import requests, json
+from settings import *
 
 token = "533495913:AAHG-ssiGLwQMCPVBSDG-WVUA8M3aUYzo-0"
 
@@ -58,24 +59,13 @@ def handle_start(message):
             add_message_db(message.chat.id, send.message_id)
 
 
-# URL:8485/app/connect/wm methods=['GET']) args (user:id, wm:id)
-
-
-# URL:8485/app/add_user  methods=['GET'] args (user:id)
-
-# URL:8485/app/disconnect/wm methods=['GET'] args (user:id)
-
-# URL:8485/app/connect/wm methods=['GET']) args (user:id, wm:id)
-
-
-
 
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        transition(message.data, message.message.chat.id)
+        transition(text_get, message.message.chat.id)
     elif message.data == "Назад":
-        go_back(message.data, message.message.chat.id)
+        go_back(text_get, message.message.chat.id)
     elif message.data  == "Остановить":
         a = MethodGet("disconnect/wm")
         add_user = {
@@ -85,9 +75,9 @@ def message_handler(message):
         result = a.transfer()
         print(result)
         if result['return'] == "SUCCESSFUL":
-            go_back(message.data, message.message.chat.id)
+            go_back(text_get, message.message.chat.id)
     elif message.data:
-        transition(message.data, message.message.chat.id)
+        transition(text_get, message.message.chat.id)
 
 
 @bot.message_handler(content_types=['text'])
@@ -112,35 +102,7 @@ def message_handler(message):
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Введите ID водомата", reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
-            # bot.send_message(message.from_user.id, result)
 
-
-
-
-# @bot.message_handler(commands=['start'])
-# def handle_start(message):
-#     del_message_db(message.chat.id)
-#     menu_list = get_branch_db(message.from_user.id)
-#     send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
-#     add_message_db(message.chat.id, send.message_id)
-
-# @bot.callback_query_handler(func=lambda message: True)
-# def determinant(message):
-#     if message.data == "Назад":
-#         go_back(message.data, message.message.chat.id)
-#     elif message.data  == "Остановить":
-#         a = MethodGet("disconnect/wm")
-#         add_user = {
-#             "telegram": message.from_user.id
-#         }
-#         a.param(**add_user)
-#         result = a.transfer()
-#         print(result)
-#     elif message.data:
-#         transition(message.data, message.message.chat.id)
-#     else:
-#         if message.data == "Подключиться к водомату":
-#             pass
 
 
 
