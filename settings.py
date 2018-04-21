@@ -1,43 +1,43 @@
-ip = "http://194.67.217.180:8484"
+# ip = "http://194.67.217.180:8484"
 
-methods = [
-    "start",
-    "status",
-    "adduser",
-    "score",
-    "recall",
-    "getlastconnection", 
-    "stop",
-    "getadmins",
-    "statistic",
-    "connectedvodomats",
-    "recommends"
-]
+# methods = [
+#     "start",
+#     "status",
+#     "adduser",
+#     "score",
+#     "recall",
+#     "getlastconnection", 
+#     "stop",
+#     "getadmins",
+#     "statistic",
+#     "connectedvodomats",
+#     "recommends"
+# ]
 
-param = {
-    "telegram": message.from_user.id,
-    "username": message.chat.first_name,
-    "review": message.text,
-    "wm": message.text,
-    "X": message.location.latitude,
-    "Y": message.location.longitude
-}
+# param = {
+#     "telegram": message.from_user.id,
+#     "username": message.chat.first_name,
+#     "review": message.text,
+#     "wm": message.text,
+#     "X": message.location.latitude,
+#     "Y": message.location.longitude
+# }
 
-regular = [
-    "Ближайшие водоматы",
-    "Баланс",
-    "Оставить отзыв",
-    "Подключиться к водомату",
-    "Остановить",
-    "Личный кабинет", 
-    "Админ панель",
-    "За сутки",
-    "За неделю",
-    "Статистика",
-    "Текущее состояние",
-    "Активные водоматы",
-    "Обратная связь"
-]
+# regular = [
+#     "Ближайшие водоматы",
+#     "Баланс",
+#     "Оставить отзыв",
+#     "Подключиться к водомату",
+#     "Остановить",
+#     "Личный кабинет", 
+#     "Админ панель",
+#     "За сутки",
+#     "За неделю",
+#     "Статистика",
+#     "Текущее состояние",
+#     "Активные водоматы",
+#     "Обратная связь"
+# ]
 
 
 
