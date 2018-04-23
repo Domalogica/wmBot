@@ -28,7 +28,6 @@ class MethodGet:
         self.request["param"] = kwargs
         return True
 
-
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     a = MethodGet("add_user")
@@ -76,6 +75,26 @@ def message_handler(message):
         print(result)
         if result['return'] == "SUCCESSFUL":
             go_back(message.data, message.message.chat.id)
+    elif message.data == "Баланс":
+        a = MethodGet("get_score/")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
+    elif message.data == "Ближайшие водоматы":
+        pass
+    elif message.data == "Текущее состояние":
+        pass
+    elif message.data == "Активные водоматы":
+        pass
+    elif message.data == "Адреса водоматов":
+        pass
+    elif message.data == "За сутки":
+        pass
+    elif message.data == "За неделю":
+        pass
     elif message.data:
         transition(message.data, message.message.chat.id)
 
