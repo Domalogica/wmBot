@@ -83,21 +83,58 @@ def message_handler(message):
         a.param(**add_user)
         result = a.transfer()
         print(result)
-    elif message.data == "Ближайшие водоматы":
-        pass
-    elif message.data == "Текущее состояние":
-        pass
-    elif message.data == "Активные водоматы":
-        pass
     elif message.data == "Адреса водоматов":
-        pass
+        a = MethodGet("get_location")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
+    elif message.data == "Текущее состояние":
+        a = MethodGet("sales_statistics")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
+    elif message.data == "Активные водоматы":
+        a = MethodGet("active_water")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
     elif message.data == "За сутки":
         pass
     elif message.data == "За неделю":
         pass
+    elif message.data == "Оставить отзыв":
+        a = MethodGet("active_water")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result)
     elif message.data:
         transition(message.data, message.message.chat.id)
 
+
+@bot.message_handler(content_types=['location'])
+def handle_start(message):
+    a = MethodGet("active_water")
+    recommends = {
+    "telegram": message.chat.id,
+    "username": message.chat.first_name,
+    "place_x": message.location.latitude,
+    "place_y": message.location.longitude
+    }
+    a.param(**recommends)
+    result = a.transfer()
+    print(result)
 
 @bot.message_handler(content_types=['text'])
 def message_handler(message):

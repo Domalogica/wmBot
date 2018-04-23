@@ -5,7 +5,7 @@ ID1 = ("Подключиться к водомату")
 ID2 = ("Личный кабинет")
 ID3 = ("Обратная связь")
 ID4 = ("Баланс")
-ID5 = ("Ближайшие водоматы")
+ID5 = ("Адреса водоматов")
 ID6 = ("Админ панель")
 ID7 = ("Оставить отзыв")
 ID8 = ("Рекомендовать место")
@@ -43,7 +43,10 @@ def generator_menu(menu_list):
         print(type(menu_list))
         user_markup = telebot.types.InlineKeyboardMarkup()
         for item in menu_list:
-            item = telebot.types.InlineKeyboardButton(text=item, callback_data=item)
+            if item == "Рекомендовать место":
+                item = telebot.types.InlineKeyboardButton(text=item, request_location=True)
+            else:
+                item = telebot.types.InlineKeyboardButton(text=item, callback_data=item)
             user_markup.add(item)
         return user_markup
     else:
@@ -69,5 +72,5 @@ def generator_stop():
 
 
 
-    
+
     
