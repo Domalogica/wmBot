@@ -76,7 +76,7 @@ def message_handler(message):
         if result['return'] == "SUCCESSFUL":
             go_back(message.data, message.message.chat.id)
     elif message.data == "Баланс":
-        a = MethodGet("get_score/")
+        a = MethodGet("get_score")
         add_user = {
             "telegram": message.from_user.id
         }
