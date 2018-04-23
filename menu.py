@@ -45,9 +45,10 @@ def generator_menu(menu_list):
         for item in menu_list:
             if item == "Рекомендовать место":
                 item = telebot.types.InlineKeyboardButton(text=item, request_location=True)
+                user_markup.add(item)
             else:
                 item = telebot.types.InlineKeyboardButton(text=item, callback_data=item)
-            user_markup.add(item)
+                user_markup.add(item)
         return user_markup
     else:
         menu_list = menu["MAIN"]
