@@ -16,7 +16,7 @@ class MethodGet:
         self.request.update({"method": method})
 
     def transfer(self):
-        response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
+        response = requests.get('http://192.168.10.32:8484/app/%s/' % self.request["method"], params=self.request["param"])
         print(response)
         try:
             response = json.loads(response.content.decode("utf-8"))
@@ -56,7 +56,6 @@ def handle_start(message):
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
             add_message_db(message.chat.id, send.message_id)
-
 
 
 @bot.callback_query_handler(func=lambda message: True)
@@ -100,7 +99,7 @@ def message_handler(message):
         result = a.transfer()
         print(result)
     elif message.data == "Активные водоматы":
-        a = MethodGet("active_water")
+        a = MethodGet("get_active_wms")
         add_user = {
             "telegram": message.from_user.id
         }
