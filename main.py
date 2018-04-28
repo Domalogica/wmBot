@@ -16,7 +16,7 @@ class MethodGet:
         self.request.update({"method": method})
 
     def transfer(self):
-        response = requests.get('http://192.168.10.32:8484/app/%s/' % self.request["method"], params=self.request["param"])
+        response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
         print(response)
         try:
             response = json.loads(response.content.decode("utf-8"))
