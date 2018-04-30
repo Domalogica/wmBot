@@ -105,7 +105,8 @@ def message_handler(message):
         }
         a.param(**add_user)
         result = a.transfer()
-        transition("0000000000000000000", message.message.chat.id)
+        message_id = get_message_db(message.message.chat.id)
+        bot.edit_message_text(chat_id=message.message.chat.id, message_id=message_id, text="0000000000000000000")
     elif message.data == "За сутки":
         pass
     elif message.data == "За неделю":
