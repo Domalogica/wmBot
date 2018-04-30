@@ -105,7 +105,7 @@ def message_handler(message):
         }
         a.param(**add_user)
         result = a.transfer()
-        print(result)
+        transition("0000000000000000000", message.message.chat.id)
     elif message.data == "За сутки":
         pass
     elif message.data == "За неделю":
