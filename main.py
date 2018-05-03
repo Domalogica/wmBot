@@ -82,6 +82,7 @@ def message_handler(message):
         a.param(**add_user)
         result = a.transfer()
         print(result)
+        bot.edit_message_text(text=result['return'])
     elif message.data == "Адреса водоматов":
         a = MethodGet("get_location")
         add_user = {
