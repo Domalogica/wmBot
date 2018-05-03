@@ -82,7 +82,7 @@ def message_handler(message):
         a.param(**add_user)
         result = a.transfer()
         print(result['return'])
-        bot.edit_message_text(text=result['return'])
+        entrance(result['return'], message.message.chat.id)
     elif message.data == "Адреса водоматов":
         a = MethodGet("get_location")
         add_user = {
@@ -163,6 +163,11 @@ def message_handler(message):
 
 
 
+
+def entrance(text, chat_id):
+    message_id = get_message_db(chat_id)
+    menu_list = get_branch_db(chat_id)
+    upt_msgmenu(text, menu_list, message_id, chat_id)
 
 def transition(text, chat_id):
     message_id = get_message_db(chat_id)
