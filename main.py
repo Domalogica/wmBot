@@ -82,7 +82,9 @@ def message_handler(message):
         a.param(**add_user)
         result = a.transfer()
         print(result['return'])
-        entrance(result['return'], message.message.chat.id)
+        ₽ = result['return']/100 + " ₽"
+        L = result['return']/400 + " литров / "
+        entrance(L + ₽, message.message.chat.id)
     elif message.data == "Адреса водоматов":
         a = MethodGet("get_location")
         add_user = {
