@@ -38,6 +38,10 @@ def handle_start(message):
     a.param(**add_user)
     result = a.transfer()
     if result['return'] == "USER_ADDED":
+        try:
+            del_msgmenu(message_id, message.chat.id)
+        except Exception as e:
+            pass
         menu_list = get_branch_db(message.from_user.id)
         send = bot.send_message(message.from_user.id, text_start, reply_markup=generator_menu(menu_list))
         add_message_db(message.chat.id, send.message_id)
