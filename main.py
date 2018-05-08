@@ -17,7 +17,6 @@ class MethodGet:
 
     def transfer(self):
         response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
-        print(response)
         try:
             response = json.loads(response.content.decode("utf-8"))
         except Exception as e:
@@ -38,7 +37,11 @@ def handle_start(message):
     a.param(**add_user)
     result = a.transfer()
     if result['return'] == "USER_ADDED":
-        message_id = get_message_db(message.chat.id)
+        message_id = None
+        try:
+            message_id = get_message_db(message.chat.id)
+        except Exception as e:
+            pass
         if not message_id:
             menu_list = get_branch_db(message.from_user.id)
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
