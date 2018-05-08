@@ -64,7 +64,17 @@ def handle_start(message):
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        transition(text_water, message.data, message.message.chat.id)
+        a = MethodGet("get_score")
+        add_user = {
+            "telegram": message.from_user.id
+        }
+        a.param(**add_user)
+        result = a.transfer()
+        print(result['return'])
+        R = str(result['return']/100) + " ₽"
+        L = str(result['return']/400) + " литров / "
+        score = R + L
+        transition(text_water + score, message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(text_get, message.data, message.message.chat.id)
     elif message.data  == "Остановить":
