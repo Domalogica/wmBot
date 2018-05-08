@@ -37,7 +37,6 @@ def handle_start(message):
     }
     a.param(**add_user)
     result = a.transfer()
-    print(response)
     if result['return'] == "USER_ADDED":
         menu_list = get_branch_db(message.from_user.id)
         send = bot.send_message(message.from_user.id, text_start, reply_markup=generator_menu(menu_list))
