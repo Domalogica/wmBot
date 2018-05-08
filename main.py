@@ -177,6 +177,7 @@ def entrance(text, chat_id):
 def transition(menu_text, text, chat_id):
     message_id = get_message_db(chat_id)
     # del_message_db(chat_id)
+    print(text)
     add_branches_db(chat_id, text)
     menu_list = get_branch_db(chat_id)
     upt_msgmenu(menu_text, text, menu_list, message_id, chat_id)
