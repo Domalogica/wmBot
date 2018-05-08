@@ -66,7 +66,7 @@ def message_handler(message):
     if message.data == "Подключиться к водомату":
         transition(text_water, message.data, message.message.chat.id)
     elif message.data == "Назад":
-        go_back(message.data, message.message.chat.id)
+        go_back(text_get, message.data, message.message.chat.id)
     elif message.data  == "Остановить":
         a = MethodGet("disconnect/wm")
         add_user = {
@@ -177,17 +177,16 @@ def entrance(text, chat_id):
 def transition(menu_text, text, chat_id):
     message_id = get_message_db(chat_id)
     # del_message_db(chat_id)
-    print(text)
     add_branches_db(chat_id, text)
     menu_list = get_branch_db(chat_id)
     upt_msgmenu(menu_text, text, menu_list, message_id, chat_id)
 
-def go_back(text, chat_id):
+def go_back(menu_text, text, chat_id):
     message_id = get_message_db(chat_id)
     # del_message_db(chat_id)
     del_branch_db(chat_id)
     menu_list = get_branch_db(chat_id)
-    upt_msgmenu(text, menu_list, message_id, chat_id)
+    upt_msgmenu(menu_text, text, menu_list, message_id, chat_id)
     
 def distributor():
     pass
