@@ -73,7 +73,7 @@ def message_handler(message):
         print(result['return'])
         R = str(result['return']/100) + " ₽"
         L = str(result['return']/400) + " литров / "
-        score = R + L
+        score = L + R
         transition(text_water + score, message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(text_get, message.data, message.message.chat.id)
