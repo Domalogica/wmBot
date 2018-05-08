@@ -64,7 +64,7 @@ def handle_start(message):
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        transition(text_water, message.message.chat.id)
+        transition(text_water, message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(message.data, message.message.chat.id)
     elif message.data  == "Остановить":
@@ -174,12 +174,12 @@ def entrance(text, chat_id):
     menu_list = get_branch_db(chat_id)
     upt_msgmenu(text, menu_list, message_id, chat_id)
 
-def transition(text, chat_id):
+def transition(menu_text, text, chat_id):
     message_id = get_message_db(chat_id)
     # del_message_db(chat_id)
     add_branches_db(chat_id, text)
     menu_list = get_branch_db(chat_id)
-    upt_msgmenu(text, menu_list, message_id, chat_id)
+    upt_msgmenu(menu_text, text, menu_list, message_id, chat_id)
 
 def go_back(text, chat_id):
     message_id = get_message_db(chat_id)
@@ -192,8 +192,8 @@ def distributor():
     pass
 
 
-def upt_msgmenu(text, menu_list, message_id, chat_id):
-    send = bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=generator_menu(menu_list))
+def upt_msgmenu(menu_text, text, menu_list, message_id, chat_id):
+    send = bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=menu_text, reply_markup=generator_menu(menu_list))
     # add_message_db(chat_id, send.message_id)
 
 
