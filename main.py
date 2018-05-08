@@ -64,7 +64,7 @@ def handle_start(message):
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        transition(message.data, message.message.chat.id)
+        transition(text_water, message.message.chat.id)
     elif message.data == "Назад":
         go_back(message.data, message.message.chat.id)
     elif message.data  == "Остановить":
