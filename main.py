@@ -70,11 +70,7 @@ def message_handler(message):
         }
         a.param(**add_user)
         result = a.transfer()
-        print(result['return'])
-        R = str(result['return']/100) + " ₽"
-        L = str(result['return']/400) + " литров / "
-        score = L + R
-        transition(text_id + score, message.data, message.message.chat.id)
+        transition(text_id, message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(text_get, message.data, message.message.chat.id)
     elif message.data  == "Остановить":
