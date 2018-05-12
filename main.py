@@ -86,12 +86,10 @@ def message_handler(message):
         result = a.transfer()
         print(result)
         if result['return'] == "SUCCESSFUL":
-
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
             score = L + R
-            lost = text_water + score
-            go_back(lost, message.data, message.message.chat.id)
+            go_back(text_water + score, message.data, message.message.chat.id)
     elif message.data == "Баланс":
         a = MethodGet("get_score")
         add_user = {
