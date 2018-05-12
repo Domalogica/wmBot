@@ -188,23 +188,21 @@ def message_handler(message):
             score = L + R
             wm = int(message.text)
 
-            # text_on = """
-            # Вы успешно подключились к %d водомату
+            text_on = """
+            Вы успешно подключились к %d водомату
 
-            # 1. Установите тару в водомат
+            1. Установите тару в водомат
 
-            # 2. Нажмите кноку "Старт" на аппарате.
+            2. Нажмите кноку "Старт" на аппарате.
 
-            #  Цена за 1 литр 4₽
+             Цена за 1 литр 4₽
 
-            # Чтобы пополнить баланс используйте купюроприемник и монетоприемник.
+            Чтобы пополнить баланс используйте купюроприемник и монетоприемник.
 
-            # Ваш баланс: %s
-            # """(wm, score)
-            print(type(wm))
-            print(type(score))
+            Ваш баланс: %s
+            """%(wm, score)
 
-            # send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
+            send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
 
 
