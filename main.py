@@ -200,7 +200,7 @@ def message_handler(message):
             Чтобы пополнить баланс используйте купюроприемник и монетоприемник.
 
             Ваш баланс: %s
-            """(message.text, score)
+            """(wm, score)
 
             send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
