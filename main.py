@@ -86,6 +86,13 @@ def message_handler(message):
         result = a.transfer()
         print(result)
         if result['return'] == "SUCCESSFUL":
+            a = MethodGet("get_score")
+            add_user = {
+                "telegram": message.from_user.id
+            }
+            a.param(**add_user)
+            result = a.transfer()
+            print(result['return'])
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
             score = L + R
