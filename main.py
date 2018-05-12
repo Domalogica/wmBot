@@ -173,7 +173,35 @@ def message_handler(message):
                 pass
             del_message_db(message.chat.id)
             menu_list = get_branch_db(message.from_user.id)
-            send = bot.send_message(message.from_user.id, "Введите ID водомата", reply_markup=generator_stop())
+            res = result["return"]
+
+
+            a = MethodGet("get_score")
+            add_user = {
+                "telegram": message.from_user.id
+            }
+            a.param(**add_user)
+            result = a.transfer()
+            print(result['return'])
+            R = str(result['return']/100) + " ₽"
+            L = str(result['return']/400) + " литров / "
+            score = L + R
+
+            text_on = """
+            Вы успешно подключились к %d водомату
+
+            1. Установите тару в водомат
+
+            2. Нажмите кноку "Старт" на аппарате.
+
+             Цена за 1 литр 4₽
+
+            Чтобы пополнить баланс используйте купюроприемник и монетоприемник.
+
+            Ваш баланс: %s
+            """(message.text, score)
+
+            send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
 
 
