@@ -201,8 +201,10 @@ def message_handler(message):
 
             Ваш баланс: %s
             """(wm, score)
+            print(type(wm))
+            print(type(score))
 
-            send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
+            # send = bot.send_message(message.from_user.id, text_on, reply_markup=generator_stop())
             add_message_db(message.chat.id, send.message_id)
 
 
