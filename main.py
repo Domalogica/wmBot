@@ -186,7 +186,7 @@ def message_handler(message):
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
             score = L + R
-            print(type(message.text))
+            wm = int(message.text)
 
             text_on = """
             Вы успешно подключились к %d водомату
