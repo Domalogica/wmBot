@@ -92,7 +92,7 @@ def message_handler(message):
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
             score = L + R
-            go_back(_1 + score, message.data, message.message.chat.id)
+            go_back(text_1 + score, message.data, message.message.chat.id)
     elif message.data == "Баланс":
         a = MethodGet("get_score")
         add_user = {
