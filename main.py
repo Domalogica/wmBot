@@ -205,7 +205,7 @@ def message_handler(message):
 def voice_processing(message):
     file_info = bot.get_file(message.voice.file_id)
     file = requests.get(token.format(token, file_info.file_path))
-    print(file)
+    print(file.content)
 
 
 def entrance(text, chat_id):
