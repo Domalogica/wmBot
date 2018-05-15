@@ -205,7 +205,7 @@ def message_handler(message):
 def voice_processing(message):
     file_info = bot.get_file(message.voice.file_id)
     file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(token, file_info.file_path))
-    print(file.content)
+    bot.send_voice(chat_id=chat_id, voice=open(file_info.file_path, 'rb'))
 
 
 def entrance(text, chat_id):
