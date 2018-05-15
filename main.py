@@ -201,6 +201,12 @@ def message_handler(message):
             add_message_db(message.chat.id, send.message_id)
 
 
+@bot.message_handler(content_types=['voice'])
+def voice_processing(message):
+    file_info = bot.get_file(message.voice.file_id)
+    print(file_info.file_path)
+    # file = requests.get(token.format(token, file_info.file_path))
+
 
 
 def entrance(text, chat_id):
