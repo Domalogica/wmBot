@@ -16,7 +16,7 @@ class MethodGet:
         self.request.update({"method": method})
 
     def transfer(self):
-        response = requests.get('http://194.67.217.180:8484/app/%s/' % self.request["method"], params=self.request["param"])
+        response = requests.get('http://api.domalogica.com/app/%s/' % self.request["method"], params=self.request["param"])
         try:
             response = json.loads(response.content.decode("utf-8"))
         except Exception as e:
@@ -143,7 +143,7 @@ def message_handler(message):
         result = a.transfer()
         print(result)
     elif message.data:
-        transition(message.data, message.message.chat.id)
+        transition(text_get, message.data, message.message.chat.id)
 
 
 @bot.message_handler(content_types=['location'])
