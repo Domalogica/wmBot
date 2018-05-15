@@ -204,7 +204,7 @@ def message_handler(message):
 @bot.message_handler(content_types=['voice'])
 def voice_processing(message):
     file_info = bot.get_file(message.voice.file_id)
-    file = requests.get(token.format(token, file_info.file_path))
+    file = requests.get(token.format('https://api.telegram.org/file/bot{0}/{1}', file_info.file_path))
     print(file.content)
 
 
