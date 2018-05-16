@@ -318,13 +318,14 @@ def del_message_db(telegram):
     result = connect_mysql.delete('message', conditional_query, *[telegram])
     return result
 
+    
+bot.remove_webhook()
 
 
 bot.polling(none_stop=True, interval = 0)
 
 
 # Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
-bot.remove_webhook()
 
 #  # Ставим заново вебхук
 # bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
