@@ -345,3 +345,4 @@ cherrypy.config.update({
 })
 
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+print(cherrypy)
