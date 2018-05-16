@@ -329,9 +329,6 @@ def del_message_db(telegram):
 # bot.polling(none_stop=True, interval = 0)
 
 
-# Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
-bot.remove_webhook()
-
  # Ставим заново вебхук
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
@@ -347,3 +344,7 @@ cherrypy.config.update({
 
  # Собственно, запуск!
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+
+
+# Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
+bot.remove_webhook()
