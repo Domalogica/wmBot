@@ -323,8 +323,8 @@ def del_message_db(telegram):
 bot.polling(none_stop=True, interval = 0)
 
 
-# # Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
-# bot.remove_webhook()
+# Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
+bot.remove_webhook()
 
 #  # Ставим заново вебхук
 # bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
