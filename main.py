@@ -16,6 +16,7 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Путь к приватному кл
 
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (token)
+cherrypy.config.update({ 'server.shutdown_timeout': 1 })
 
 
 bot = telebot.TeleBot(token)
