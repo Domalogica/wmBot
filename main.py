@@ -7,7 +7,7 @@ from settings import *
 import cherrypy
 
 token = "533495913:AAHG-ssiGLwQMCPVBSDG-WVUA8M3aUYzo-0"
-WEBHOOK_HOST = '194.67.204.153'
+WEBHOOK_HOST = 'http://api.domalogica.com'
 WEBHOOK_PORT = 8443  # 443, 80, 88 или 8443 (порт должен быть открыт!)
 WEBHOOK_LISTEN = '0.0.0.0'  # На некоторых серверах придется указывать такой же IP, что и выше
 
