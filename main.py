@@ -18,7 +18,6 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Путь к приватному кл
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (token)
 
-print('Hello!')
 
 
 bot = telebot.TeleBot(token)
@@ -38,7 +37,6 @@ class WebhookServer(object):
         else:
             raise cherrypy.HTTPError(403)
 
-print('Hello!')
 
 class MethodGet:
     def __init__(self, method):
@@ -57,7 +55,6 @@ class MethodGet:
         self.request["param"] = kwargs
         return True
 
-print('Hello!')
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
@@ -92,7 +89,6 @@ def handle_start(message):
             send = bot.send_message(message.from_user.id, "Выберите один из пунктов меню", reply_markup=generator_menu(menu_list))
             add_message_db(message.chat.id, send.message_id)
 
-print('Hello!')
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
@@ -336,17 +332,14 @@ bot.remove_webhook()
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
 
-
- 
-
 cherrypy.config.update({
     'server.socket_host': WEBHOOK_LISTEN,
     'server.socket_port': WEBHOOK_PORT,
     'server.ssl_module': 'builtin',
     'server.ssl_certificate': WEBHOOK_SSL_CERT,
-    'server.ssl_private_key': WEBHOOK_SSL_PRIV,
-    'server.shutdown_timeout': 1
+    'server.ssl_private_key': WEBHOOK_SSL_PRIV
 })
+
 
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
 
