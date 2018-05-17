@@ -339,7 +339,11 @@ bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
 
 
-cherrypy.config.update({
+cherrypy.config.update({'global': { 
+    'log.screen': False, 
+    'log.error_file': '', 
+    'log.access_file': '' 
+}},{
     'server.socket_host': WEBHOOK_LISTEN,
     'server.socket_port': WEBHOOK_PORT,
     'server.ssl_module': 'builtin',
