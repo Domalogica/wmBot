@@ -345,6 +345,7 @@ cherrypy.config.update({
     'server.ssl_module': 'builtin',
     'server.ssl_certificate': WEBHOOK_SSL_CERT,
     'server.ssl_private_key': WEBHOOK_SSL_PRIV,
+    'server.shutdown_timeout': 1
 })
 
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
