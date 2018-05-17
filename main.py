@@ -333,7 +333,6 @@ def del_message_db(telegram):
 
 bot.remove_webhook()
 
-time.sleep(5) # <<<ПАУЗА
 
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
