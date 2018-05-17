@@ -5,6 +5,7 @@ from db import connect_mysql
 import requests, json
 from settings import *
 import cherrypy
+import time
 
 token = "533495913:AAHG-ssiGLwQMCPVBSDG-WVUA8M3aUYzo-0"
 WEBHOOK_HOST = '194.67.204.153'
@@ -331,6 +332,8 @@ def del_message_db(telegram):
 
 
 bot.remove_webhook()
+
+time.sleep(5) # <<<ПАУЗА
 
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
