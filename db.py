@@ -148,7 +148,7 @@ class MysqlPython(object):
         return result
 
 
-connect_mysql = MysqlPython('194.67.204.153', 'root', '7087', 'wm_bot')
+connect_mysql = MysqlPython('127.0.0.1', 'root', '7087', 'wm_bot')
 
 
 #select
