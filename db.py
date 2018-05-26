@@ -51,7 +51,7 @@ class MysqlPython(object):
             query += " WHERE %s" % where
 
         self.__open()
-        # self.__session.execute(query, values)
+        self.__session.execute(query, values)
         number_rows = self.__session.rowcount
         try:
             number_columns = len(self.__session.description)
