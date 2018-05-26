@@ -44,7 +44,7 @@ class MethodGet:
         self.request.update({"method": method})
 
     def transfer(self):
-        response = requests.get('http://194.67.204.153:8181/app/%s/' % self.request["method"], params=self.request["param"])
+        response = requests.get('http://api.domalogica.com/app/%s/' % self.request["method"], params=self.request["param"])
         try:
             response = json.loads(response.content.decode("utf-8"))
         except Exception as e:
