@@ -18,7 +18,8 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Путь к приватному кл
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (token)
 
-
+SERVER_URL = "api.domalogica.com/"
+SERVER_PATH = "app/"
 
 bot = telebot.TeleBot(token)
 
@@ -38,33 +39,18 @@ class WebhookServer(object):
             raise cherrypy.HTTPError(403)
 
 
-class MethodGet:
-    def __init__(self, method):
-        self.request = {"method": "", "param": {}}
-        self.request.update({"method": method})
-
-    def transfer(self):
-        response = requests.get('http://api.domalogica.com/app/%s/' % self.request["method"], params=self.request["param"])
-        try:
-            response = json.loads(response.content.decode("utf-8"))
-        except Exception as e:
-            pass
-        return response
-
-    def param(self, **kwargs):
-        self.request["param"] = kwargs
-        return True
+def transfer(method, **kwargs):
+    url = 'http://%s%s%s/' % (SERVER_URL, SERVER_PATH, method)
+    response = requests.get(url, params=kwargs)
+    try:
+        return json.loads(response.content.decode("utf-8"))
+    except Exception:
+        pass
 
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    a = MethodGet("add_user")
-    add_user = {
-        "telegram": message.from_user.id,
-        "first_name": message.chat.first_name
-    }
-    a.param(**add_user)
-    result = a.transfer()
+    result = transfer("add_user", telegram=message.from_user.id, first_name=message.chat.first_name)
     if result['return'] == "USER_ADDED":
         try:
             del_message_db(message.chat.id)
@@ -92,69 +78,34 @@ def handle_start(message):
 @bot.callback_query_handler(func=lambda message: True)
 def message_handler(message):
     if message.data == "Подключиться к водомату":
-        a = MethodGet("get_score")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        transfer("get_score", telegram=message.from_user.id)
         transition(text_id, message.data, message.message.chat.id)
     elif message.data == "Назад":
         go_back(text_get, message.data, message.message.chat.id)
     elif message.data  == "Остановить":
-        a = MethodGet("disconnect/wm")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("disconnect/wm", telegram=message.from_user.id)
         print(result)
         if result['return'] == "SUCCESSFUL":
-            a = MethodGet("get_score")
-            add_user = {
-                "telegram": message.from_user.id
-            }
-            a.param(**add_user)
-            result = a.transfer()
+            result = transfer("get_score", telegram=message.from_user.id)
             print(result['return'])
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
             score = L + R
             go_back(text_1 + score, message.data, message.message.chat.id)
     elif message.data == "Баланс":
-        a = MethodGet("get_score")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("get_score", telegram=message.from_user.id)
         print(result['return'])
         R = str(result['return']/100) + " ₽"
         L = str(result['return']/400) + " литров / "
         entrance(L + R, message.message.chat.id)
     elif message.data == "Адреса водоматов":
-        a = MethodGet("get_location")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("get_location", telegram=message.from_user.id)
         print(result)
     elif message.data == "Текущее состояние":
-        a = MethodGet("sales_statistics")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("sales_statistics", telegram=message.from_user.id)
         print(result)
     elif message.data == "Активные водоматы":
-        a = MethodGet("get_active_wms")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("get_active_wms", telegram=message.from_user.id)
         print(result)
         message_id = get_message_db(message.message.chat.id)
         bot.edit_message_text(chat_id=message.message.chat.id, message_id=message_id, text="0000000000000000000")
@@ -163,12 +114,7 @@ def message_handler(message):
     elif message.data == "За неделю":
         pass
     elif message.data == "Оставить отзыв":
-        a = MethodGet("active_water")
-        add_user = {
-            "telegram": message.from_user.id
-        }
-        a.param(**add_user)
-        result = a.transfer()
+        result = transfer("active_water", telegram=message.from_user.id)
         print(result)
     elif message.data:
         transition(text_get, message.data, message.message.chat.id)
@@ -176,15 +122,13 @@ def message_handler(message):
 
 @bot.message_handler(content_types=['location'])
 def handle_start(message):
-    a = MethodGet("active_water")
     recommends = {
-    "telegram": message.chat.id,
-    "username": message.chat.first_name,
-    "place_x": message.location.latitude,
-    "place_y": message.location.longitude
+        "telegram": message.chat.id,
+        "username": message.chat.first_name,
+        "place_x": message.location.latitude,
+        "place_y": message.location.longitude
     }
-    a.param(**recommends)
-    result = a.transfer()
+    result = transfer("active_water", **recommends)
     print(result)
 
 @bot.message_handler(content_types=['text'])
@@ -192,13 +136,7 @@ def message_handler(message):
     if message.text.isdigit():
         menu_list = get_branch_db(message.from_user.id)
         if menu_list[-1] == "Подключиться к водомату":
-            a = MethodGet("connect/wm")
-            add_user = {
-                "telegram": message.from_user.id,
-                "wm": message.text
-            }
-            a.param(**add_user)
-            result = a.transfer()
+            result = transfer("connect/wm", telegram=message.from_user.id, wm=message.text)
             print(result)
             try:
                 message_id = get_message_db(message.chat.id)
@@ -209,13 +147,7 @@ def message_handler(message):
             menu_list = get_branch_db(message.from_user.id)
             res = result["return"]
 
-
-            a = MethodGet("get_score")
-            add_user = {
-                "telegram": message.from_user.id
-            }
-            a.param(**add_user)
-            result = a.transfer()
+            result = transfer("get_score", telegram=message.from_user.id)
             print(result['return'])
             R = str(result['return']/100) + " ₽"
             L = str(result['return']/400) + " литров / "
@@ -254,7 +186,7 @@ def go_back(menu_text, text, chat_id):
     del_branch_db(chat_id)
     menu_list = get_branch_db(chat_id)
     upt_msgmenu(menu_text, text, menu_list, message_id, chat_id)
-    
+
 def distributor():
     pass
 
