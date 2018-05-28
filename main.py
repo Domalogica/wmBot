@@ -51,6 +51,7 @@ def transfer(method, **kwargs):
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     result = transfer("add_user", telegram=message.from_user.id, first_name=message.chat.first_name)
+    print(result)
     if result['return'] == "USER_ADDED":
         try:
             del_message_db(message.chat.id)
