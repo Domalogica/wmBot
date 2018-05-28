@@ -14,7 +14,7 @@ class MysqlPython(object):
     __session    = None
     __connection = None
 
-    def __init__(self, host='', user='root', password='', database='', charset='utf8'):
+    def __init__(self, host='194.67.216.111', user='root', password='', database='', charset='utf8'):
         self.__host     = host
         self.__user     = user
         self.__password = password
